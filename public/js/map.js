@@ -64,23 +64,48 @@ function loadMap(position) {
 
   heatmap = Maptastic.heatmapHash['test'];
 
-  var toggleHeatmap = function() {
+
+}
+
+function initialize() {
+
+  var toggleHeatmap = function(heatmapName, mapName) {
+
+    var heatmap = Maptastic.heatmapHash[heatmapName];
 
     if( heatmap.getMap() != null ) {
       heatmap.setMap(null);
     }
     else {
-      heatmap.setMap(map);
+      heatmap.setMap(Maptastic.mapHash[mapName]);
     }
 
   };
 
+  var search = function() {
+
+    var address = $(".search-input").val();
+    var geocoder = new google.maps.Geocoder();
+    var map = Maptastic.mapHash['map-container'];
+
+    geocoder.geocode( { 'address': address}, function(results, status) {
+      if (status == google.maps.GeocoderStatus.OK) {
+        map.setCenter(results[0].geometry.location);
+      } else {
+        alert('Geocode was not successful for the following reason: ' + status);
+      }
+    });
+
+    $(".search-input").val("");
+
+
+  };
+
+  GEO.getCurrentPos(loadMap);
+
+  $(".search-button").on("click", search);
   $("#navbar").on("click", ".toggle-heatmap", toggleHeatmap);
 
-}
-
-function initialize() {
-  GEO.getCurrentPos(loadMap);
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);
