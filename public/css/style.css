@@ -57,3 +57,41 @@ body {
   width: 64px;
   height: 64px;
 }
+
+.search {
+  position: absolute;
+  top: 50px;
+  left: 70px;
+  float: left;
+  z-index: 1000;
+}
+
+.search-form {
+  position: relative;
+/*  top: -5px;*/
+  display: inline;
+}
+
+.search-input {
+  padding: 8px 15px;
+  width: 400px;
+  background: white;
+  border: 0px solid #dbdbdb;
+  box-shadow: 0px 5px 5px #888888;
+}
+
+.search-button {
+  position: relative;
+  padding: 6px 15px;
+  left: -12px;
+  border: 2px solid orange;
+  background-color: orange;
+  color: #fafafa;
+  box-shadow: 5px 5px 5px #888888;
+}
+
+.search-button:hover {
+  background-color: #B26B00;
+  border: 2px solid #B26B00;
+  color: orange;
+}
