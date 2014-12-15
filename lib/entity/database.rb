@@ -59,7 +59,6 @@ module Database
   end
 end
 
-
 #Database.import_crosswalk('/Users/b00134n/code/mks/exercises/maptastic/public/assets/data/2013_Gaz_tracts_national.txt')
 #Database.import_data('/Users/b00134n/code/mks/exercises/maptastic/public/assets/data/ACS_13_5YR_DP03_with_ann.csv')
-Database.join_geography
+#Database.join_geography
