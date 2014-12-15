@@ -4,7 +4,7 @@ var GEO = (function() {
       supported = 'geolocation' in navigator,
       watchID,
       options = {
-                  timeout: (5 * 1000),
+                  timeout: (10 * 1000),
                   maximumAge: (1000 * 60 * 15),
                   enableHighAccuracy: true
                 };

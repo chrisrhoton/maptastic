@@ -15,8 +15,7 @@ body {
 }
 
 .transparent {
-  background:#7f7f7f;
-  background:rgba(0,0,0,0.5);
+  background: #333333;
 }
 
 .bigger {
@@ -26,11 +25,19 @@ body {
 }
 
 .navbar-default .navbar-nav>li>a {
-  color: orange;
+  color: #66CCff;
+}
+
+.navbar-default .navbar-nav>li>a:hover {
+  color: #AFAFAF;
 }
 
 .navbar-default .navbar-brand {
-  color: orange;
+  color: #66CCff;
+}
+
+.navbar-default .navbar-brand:hover {
+  color: #AFAFAF;
 }
 
 .navbar-brand {
@@ -44,4 +51,9 @@ body {
   top: 50px;
   width: 100%;
   height: 100%;
+}
+
+.media img {
+  width: 64px;
+  height: 64px;
 }
