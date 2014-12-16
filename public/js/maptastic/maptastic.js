@@ -3,7 +3,9 @@ var Maptastic = (function() {
   var my = {
     markerHash: {},
     mapHash: {},
-    heatmapHash: {}
+    heatmapHash: {},
+    dataHash: {}
+
   };
 
   var mapOptions = {
@@ -35,6 +37,12 @@ var Maptastic = (function() {
         "featureType": "administrative",
         "stylers": [
           { "visibility": "off" }
+        ]
+      }, {
+        "featureType": "administrative.locality",
+        "elementType": "labels",
+        "stylers": [
+          { "visibility": "on" }
         ]
       },{
         "featureType": "landscape.man_made",
@@ -136,14 +144,19 @@ var Maptastic = (function() {
 
   };
 
-  my.createHeatmap = function(heatmapData, heatmapName) {
+  my.convertPointsToHeatMap = function(key) {
+    return my.dataHash[key].map(function(v, i) {
+      return { location: new google.maps.LatLng(v[0], v[1]), weight: v[2] };
+    });
+  }
+
+  my.createHeatmap = function(heatmapName) {
 
     var heatmap = new google.maps.visualization.HeatmapLayer({
-                    data: heatmapData,
+                    data: my.convertPointsToHeatMap(heatmapName),
                     dissipating: true,
-                    radius: 40
+                    radius: 50
                   });
-
     my.heatmapHash[heatmapName] = heatmap;
 
   }
