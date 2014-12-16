@@ -1,11 +1,11 @@
 module Database
   require_relative '../repos/sql_wrapper'
   require 'ostruct'
-  @host = ''
+  @host = ENV['MAPTASTIC_HOST']
   @port = 5432
-  @dbname = ''
-  @user = ''
-  @password = ''
+  @dbname = 'maptastic'
+  @user = ENV['MAPTASTIC_USER']
+  @password = ENV['MAPTASTIC_PASSWORD']
 
   def self.import_crosswalk(path)
     SqlWrapper.initialize(host: @host, port: @port, dbname: @dbname, user: @user, password: @password)

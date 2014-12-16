@@ -1,2 +1,4 @@
 /public/assets/data
 .elasticbeanstalk/
+config.ru
+vendor/
