@@ -66,12 +66,6 @@ body {
   z-index: 1000;
 }
 
-.search-form {
-  position: relative;
-/*  top: -5px;*/
-  display: inline;
-}
-
 .search-input {
   padding: 8px 15px;
   width: 400px;
@@ -84,20 +78,20 @@ body {
   position: relative;
   padding: 6px 15px;
   left: -12px;
-  border: 2px solid orange;
+  border: 2px solid #44AAFF;
   -webkit-border-top-right-radius: 3px;
   -webkit-border-bottom-right-radius: 3px;
   -moz-border-radius-topright: 3px;
   -moz-border-radius-bottomright: 3px;
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
-  background-color: orange;
+  background-color: #44AAFF;
   color: #fafafa;
   box-shadow: 5px 5px 5px #888888;
 }
 
 .search-button:hover {
-  background-color: #B26B00;
-  border: 2px solid #B26B00;
-  color: orange;
+  background-color: #66CCFF;
+  border: 2px solid #66CCFF;
+  color: #FFFFFF;
 }

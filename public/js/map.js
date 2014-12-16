@@ -79,9 +79,19 @@ function initialize() {
 
   };
 
+  var searchKeyHandler = function(event) {
+
+    if ( event.keyCode == 13 ) {
+      event.preventDefault();
+      search();
+    }
+
+  };
+
   GEO.getCurrentPos(loadMap);
 
   $(".search-button").on("click", search);
+  $(".search-input").on("keyup", searchKeyHandler)
   $("#navbar").on("click", ".toggle-heatmap", toggleHeatmap);
 
 }
