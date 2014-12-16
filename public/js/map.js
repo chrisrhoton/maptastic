@@ -3,20 +3,6 @@ function loadMap(position) {
   Maptastic.loadMap(position, 'map-container');
   var map = Maptastic.mapHash['map-container'];
 
-  var contentString = '<div class="media">' +
-    '<a class="media-left" href="#">' +
-    '<img src="./images/kanye-christmas.jpg" alt="Kanye!!">' +
-    '</a>' +
-    '<div class="media-body">' +
-    '<h4 class="media-heading">Kanye</h4>' +
-    'Lots of content here.' +
-    '</div>' +
-    '</div>';
-
-  var infowindow = new google.maps.InfoWindow({
-      content: contentString
-  });
-
   Maptastic.createMarker(position, 'map-container', 'user');
 
   var locationMarker = Maptastic.markerHash['user'];
@@ -35,10 +21,6 @@ function loadMap(position) {
     });
 
   }, 10000);
-
-  google.maps.event.addListener(locationMarker, 'click', function() {
-    infowindow.open(map,locationMarker);
-  });
 
   Maptastic.createHeatmap('HC03_VC04');
   Maptastic.addHeatmapToMap('HC03_VC04', 'map-container');
@@ -94,7 +76,32 @@ function initialize() {
   $(".search-input").on("keyup", searchKeyHandler)
   $("#navbar").on("click", ".toggle-heatmap", toggleHeatmap);
 
-}
+  var displayAboutWindow = function() {
+
+    console.log("Here I am!");
+
+    var contentString = "<p class='lead'>You're viewing employment percentages.</p>";
+
+    var map = Maptastic.mapHash['map-container'];
+
+    var infowindow = new google.maps.InfoWindow({
+        content: contentString,
+        position: map.getCenter()
+    });
+    
+    infowindow.open(map);
+
+    setTimeout( function() {
+      infowindow.close();
+    }, 3000);
+
+  }
+
+  $('#overlay-dropdown').on('click', '.employ-overlay', displayAboutWindow);
+
+};
 
 google.maps.event.addDomListener(window, 'load', initialize);
+
+
 
