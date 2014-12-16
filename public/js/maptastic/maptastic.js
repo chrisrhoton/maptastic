@@ -18,7 +18,7 @@ var Maptastic = (function() {
     },
     zoom: 12,
 
-    mapTypeControl: false,
+    mapTypeControl: true,
 
     scaleControl: true,
     scaleControlOptions: {
