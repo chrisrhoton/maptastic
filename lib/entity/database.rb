@@ -1,6 +1,7 @@
 module Database
   require_relative '../repos/sql_wrapper'
   require 'ostruct'
+  @host = 'localhost'
 
   def self.import_crosswalk(path)
     SqlWrapper.initialize('localhost', 'maptastic')
@@ -57,8 +58,23 @@ module Database
     columns = ['USPS', 'INTPTLAT', 'INTPTLONG']
     SqlWrapper.join_column('data_census_points', columns, 'data_census_tract', 'GEOID', 'crosswalk_census_tract', 'GEOID')
   end
+
+  def self.get_data(column_name)
+    SqlWrapper.initialize('localhost', 'maptastic')
+    response = SqlWrapper.get_data('data_census_points', column_name)
+    arr = []
+    response.each do |v|
+      if (v['weight'] != nil)
+        arr.push(v)
+      end
+    end
+    return arr
+  end
 end
 
 #Database.import_crosswalk('/Users/b00134n/code/mks/exercises/maptastic/public/assets/data/2013_Gaz_tracts_national.txt')
 #Database.import_data('/Users/b00134n/code/mks/exercises/maptastic/public/assets/data/ACS_13_5YR_DP03_with_ann.csv')
 #Database.join_geography
+#Database.get_data('HC03_VC04').each_with_index do |v, i|
+#  puts test
+#end

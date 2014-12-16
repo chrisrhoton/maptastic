@@ -139,7 +139,9 @@ var Maptastic = (function() {
   my.createHeatmap = function(heatmapData, heatmapName) {
 
     var heatmap = new google.maps.visualization.HeatmapLayer({
-                    data: heatmapData
+                    data: heatmapData,
+                    dissipating: true,
+                    radius: 40
                   });
 
     my.heatmapHash[heatmapName] = heatmap;

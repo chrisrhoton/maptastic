@@ -49,4 +49,9 @@ module SqlWrapper
     db.exec("CREATE TABLE #{destination} AS SELECT a.*, #{columns.join(', ').gsub(/(^|\s)/, '\1b.')} FROM #{source1} as a LEFT JOIN #{source2} as b ON a.#{key1} = b.#{key2};")
     db.exec("ALTER TABLE #{destination} ADD PRIMARY KEY (#{key1})")
   end
+
+  def self.get_data(table_name, column_name)
+    db = PG.connect(host: @host, dbname: @db_name)
+    db.exec("SELECT USPS as state, INTPTLAT as lat, INTPTLONG as lon, #{column_name} as weight FROM #{table_name};")
+  end
 end
