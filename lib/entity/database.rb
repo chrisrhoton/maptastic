@@ -1,10 +1,14 @@
 module Database
   require_relative '../repos/sql_wrapper'
   require 'ostruct'
-  @host = 'localhost'
+  @host = ''
+  @port = 5432
+  @dbname = 'maptastic'
+  @user = ''
+  @password = ''
 
   def self.import_crosswalk(path)
-    SqlWrapper.initialize('localhost', 'maptastic')
+    SqlWrapper.initialize(host: @host, port: @port, dbname: @dbname, user: @user, password: @password)
     SqlWrapper.add_table('crosswalk_census_tract')
     columns = []
     columns.push(OpenStruct.new(:name => 'USPS', :type => 'char(2)'))
@@ -23,7 +27,7 @@ module Database
   end
 
   def self.import_data(path)
-    SqlWrapper.initialize('localhost', 'maptastic')
+    SqlWrapper.initialize(host: @host, port: @port, dbname: @dbname, user: @user, password: @password)
     SqlWrapper.add_table('data_census_tract')
     columns = []
     columns.push(OpenStruct.new(:name => 'GEOID', :type => 'char(11) primary key'))
@@ -54,13 +58,13 @@ module Database
   end
 
   def self.join_geography
-    SqlWrapper.initialize('localhost', 'maptastic')
+    SqlWrapper.initialize(host: @host, port: @port, dbname: @dbname, user: @user, password: @password)
     columns = ['USPS', 'INTPTLAT', 'INTPTLONG']
     SqlWrapper.join_column('data_census_points', columns, 'data_census_tract', 'GEOID', 'crosswalk_census_tract', 'GEOID')
   end
 
   def self.get_data(column_name)
-    SqlWrapper.initialize('localhost', 'maptastic')
+    SqlWrapper.initialize(host: @host, port: @port, dbname: @dbname, user: @user, password: @password)
     response = SqlWrapper.get_data('data_census_points', column_name)
     arr = []
     response.each do |v|
