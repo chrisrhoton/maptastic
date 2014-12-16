@@ -1,7 +1,9 @@
 <script>
-  Maptastic.dataHash['HC03_VC04'] = [];
-  <% Database.get_data('HC03_VC04').each_with_index do |v, i| %>
-  Maptastic.dataHash['HC03_VC04'].push([<%="#{v['lat'].to_s}"%>, <%="#{v['lon'].to_s}"%>, <%="#{v['weight'].to_s}"%>]);
+  <% ['HC03_VC04', 'HC03_VC30', 'HC03_VC31', 'HC03_VC33', 'HC01_VC90'].each do |column| %>
+    Maptastic.dataHash["<%=column%>"] = [];
+    <% Database.get_data(column).each_with_index do |v, i| %>
+    Maptastic.dataHash["<%=column%>"].push([<%="#{v['lat'].to_s}"%>, <%="#{v['lon'].to_s}"%>, <%="#{v['weight'].to_s}"%>]);
+    <% end %>
   <% end %>
 </script>
 

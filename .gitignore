@@ -2,3 +2,4 @@
 .elasticbeanstalk/
 config.ru
 vendor/
+.idea/
