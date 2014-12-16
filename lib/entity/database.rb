@@ -3,7 +3,7 @@ module Database
   require 'ostruct'
   @host = ''
   @port = 5432
-  @dbname = 'maptastic'
+  @dbname = ''
   @user = ''
   @password = ''
 
