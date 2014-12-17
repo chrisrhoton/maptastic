@@ -6,6 +6,7 @@ require_relative 'lib/entity/database.rb'
 # set :bind, '0.0.0.0' # This is needed for Vagrant
 
 get '/' do
+  @isIndex = true;
   erb :index
 end
 

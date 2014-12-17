@@ -22,25 +22,9 @@ function loadMap(position) {
 
   }, 10000);
 
-  Maptastic.createHeatmap('HC03_VC04');
-  Maptastic.addHeatmapToMap('HC03_VC04', 'map-container');
-
 }
 
 function initialize() {
-
-  var toggleHeatmap = function(heatmapName, mapName) {
-
-    var heatmap = Maptastic.heatmapHash[heatmapName];
-
-    if( heatmap.getMap() != null ) {
-      heatmap.setMap(null);
-    }
-    else {
-      heatmap.setMap(Maptastic.mapHash[mapName]);
-    }
-
-  };
 
   var search = function() {
 
@@ -74,13 +58,17 @@ function initialize() {
 
   $(".search-button").on("click", search);
   $(".search-input").on("keyup", searchKeyHandler)
-  $("#navbar").on("click", ".toggle-heatmap", toggleHeatmap);
 
-  var displayAboutWindow = function() {
+  var displayInfoWindow = function(overlay) {
 
-    console.log("Here I am!");
-
-    var contentString = "<p class='lead'>You're viewing employment percentages.</p>";
+    var messageHash = { 
+      'HC03_VC04': "Percentage employed", 
+      'HC03_VC30': "Commuters using public transport (percent)", 
+      'HC03_VC31': "Commuters walking to work (percent)", 
+      'HC03_VC33': "Percentage working from home.", 
+      'HC01_VC90': "Mean earnings" 
+    }
+    var contentString = "<p class='lead'>" + messageHash[overlay] + "</p>";
 
     var map = Maptastic.mapHash['map-container'];
 
@@ -97,7 +85,60 @@ function initialize() {
 
   }
 
-  $('#overlay-dropdown').on('click', '.employ-overlay', displayAboutWindow);
+  var displayBreadcrumb = function(overlay) {
+
+    var breadcrumbHash = { 
+      'HC03_VC04': "Percentage Employed", 
+      'HC03_VC30': "Commuters: Public transport", 
+      'HC03_VC31': "Commuters: Walking", 
+      'HC03_VC33': "Working from Home", 
+      'HC01_VC90': "Mean earnings" 
+    }
+
+    var $breadcrumb = $("<li class='overlay'><a href='#'>" + breadcrumbHash[overlay] + "</a></li>");
+
+    var $navbar = $(".bc-overlay");
+
+    $navbar.find(".overlay").detach();
+    $navbar.append($breadcrumb);
+
+  };
+
+  var displayOverlay = function() {
+
+    var overlay = $(this).data("overlay");
+
+    var heatmap = Maptastic.heatmapHash[overlay];
+
+    if( Maptastic.currentHeatmap != null ) {
+      Maptastic.currentHeatmap.setMap(null);
+    }
+
+    if( heatmap != null) {
+
+      if( heatmap == Maptastic.currentHeatmap ) {
+        Maptastic.currentHeatmap = null;
+        var $navbar = $(".bc-overlay");
+        $navbar.find(".overlay").detach();
+        return;
+      }
+      Maptastic.addHeatmapToMap(overlay, 'map-container');
+      displayInfoWindow(overlay);
+      displayBreadcrumb(overlay);
+      return;
+    }
+    else {
+
+      Maptastic.createHeatmap(overlay);
+      Maptastic.addHeatmapToMap(overlay, 'map-container');
+      displayInfoWindow(overlay);
+      displayBreadcrumb(overlay);
+
+    }
+
+  }
+
+  $('#overlay-dropdown').on('click', '.overlay', displayOverlay);
 
 };
 

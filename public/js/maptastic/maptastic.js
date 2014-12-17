@@ -4,7 +4,8 @@ var Maptastic = (function() {
     markerHash: {},
     mapHash: {},
     heatmapHash: {},
-    dataHash: {}
+    dataHash: {},
+    currentHeatmap: null
 
   };
 
@@ -162,8 +163,22 @@ var Maptastic = (function() {
   }
 
   my.addHeatmapToMap = function(heatmapName, mapName) {
-    my.heatmapHash[heatmapName].setMap(my.mapHash[mapName]);
+    my.currentHeatmap = my.heatmapHash[heatmapName]
+    my.currentHeatmap.setMap(my.mapHash[mapName]);
   };
+
+  // my.toggleHeatmap = function(heatmapName, mapName) {
+
+  //   var heatmap = Maptastic.heatmapHash[heatmapName];
+
+  //   if( heatmap.getMap() != null ) {
+  //     heatmap.setMap(null);
+  //   }
+  //   else {
+  //     heatmap.setMap(Maptastic.mapHash[mapName]);
+  //   }
+
+  // };
 
   return my;
 

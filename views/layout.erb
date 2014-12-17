@@ -37,25 +37,27 @@
         <a class="navbar-brand" href="/"><span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></a>
       </div>
       <div id="navbar" class="navbar-collapse collapse">
-        <ul class="nav navbar-nav">
+        <ul class="nav navbar-nav bc-overlay">
           <li><a href="/"><span class="bigger">Maptastic</span></a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li><a href="/">Home</a></li>
+          <% if @isIndex %>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Overlay <span class="caret"></span></a>
             <ul id="overlay-dropdown" class="dropdown-menu" role="menu">
-              <li><a href="#" class="employ-overlay">Employment</a></li>
+              <li><a href="#" class="overlay" data-overlay="HC03_VC04">Employment</a></li>
               <li class="divider"></li>
               <li class="dropdown-header">Commute</li>
-              <li><a href="#">Walking</a></li>
-              <li><a href="#">Public Transport</a></li>
-              <li><a href="#">Work From Home</a></li>
+              <li><a href="#" class="overlay" data-overlay="HC03_VC31">Walking</a></li>
+              <li><a href="#" class="overlay" data-overlay="HC03_VC30">Public Transport</a></li>
+              <li><a href="#" class="overlay" data-overlay="HC03_VC33">Work From Home</a></li>
               <li class="divider"></li>
               <li class="dropdown-header">Income</li>
-              <li><a href="#">Mean Income</a></li>
+              <li><a href="#" class="overlay" data-overlay="HC01_VC90">Mean Income</a></li>
             </ul>
           </li>
+          <% end %>
           <li><a href="../about">About</a></li>
           <li><a href="/contact">Contact</a></li>
         </ul>
